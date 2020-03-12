@@ -1,0 +1,46 @@
+[filter "media"]
+	clean = git media clean %f
+	smudge = git media smudge %f
+	required = true
+[user]
+[core]
+	excludesfile = ~/.gitignore_global
+        editor = vim
+	pager = bat -p
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[push]
+	default = simple
+[alias]
+	add-commit = !git add -A && git commit
+        c = commit
+        can = commit --amend --no-edit
+        cm = commit -m
+        co = checkout
+        dog = log --all --decorate --oneline --graph
+        files = !git diff --name-only $(git merge-base HEAD \"$REVIEW_BASE\")
+        l = log --date=short --decorate --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]"
+        p = pull
+        pp = push
+        review = !nvim -p $(git files) +\"tabdo Gdiff $REVIEW_BASE\" +\"let g:gitgutter_diff_base = '$REVIEW_BASE'\"
+  sm = submodule
+        st = status
+        stat = !git diff --stat $(git merge-base HEAD \"$REVIEW_BASE\")
+        what = "!git config --get-regexp alias"
+[diff]
+        algorithm = histogram
+[github]
+[blame]
+        date = relative
+[rebase]
+        autosquash = true
+[commit]
+        verbose = true
+[status]
+        showUntrackedFiles = all
+[merge]
+        conflictstyle = diff3
+
