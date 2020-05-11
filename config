@@ -4,9 +4,9 @@
 	required = true
 [user]
 [core]
-	excludesfile = ~/.gitignore_global
+	; excludesfile = ~/.gitignore_global
         editor = vim
-	pager = bat -p
+        pager = /usr/bin/cat 
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
